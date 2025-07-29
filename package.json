@@ -1,0 +1,8 @@
+{
+    "name": "micro-frontends",
+    "private": true,
+    "workspaces": [
+      "cart",
+      "home"
+    ]
+  }
