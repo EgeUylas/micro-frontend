@@ -131,4 +131,4 @@ export const storageUtils = {
       window.removeEventListener(STORAGE_KEYS.SYNC_EVENT, handleCartUpdate as EventListener);
     };
   }
-};
+}; 
