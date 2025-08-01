@@ -13,9 +13,6 @@ const nextConfig: NextConfig = {
     ],
   },
   
-  // Multi-zone configuration for cart app
-  basePath: '/cart',
-  
   // Configure CORS for development
   async headers() {
     return [

@@ -5,7 +5,6 @@ import { CartItem } from '../../share/types/cart';
 import CartItemComponent from './CartItem';
 import Button from './ui/Button';
 import { storageUtils, CartData } from '../utils/storage';
-import Link from 'next/link';
 
 const CartList: React.FC = () => {
   const [cartData, setCartData] = useState<CartData | null>(null);
@@ -41,6 +40,10 @@ const CartList: React.FC = () => {
     storageUtils.clearCart();
   };
 
+  const goToShopping = () => {
+    window.open('http://localhost:3000', '_blank');
+  };
+
   if (loading) {
     return (
       <div className="text-center py-12">
@@ -55,11 +58,12 @@ const CartList: React.FC = () => {
         <div className="text-6xl mb-4">🛒</div>
         <h2 className="text-2xl font-semibold text-gray-900 mb-2">Sepetiniz Boş</h2>
         <p className="text-gray-600 mb-6">Sepetinizde henüz ürün bulunmuyor.</p>
-        <Link href="/">
-          <Button variant="primary">
-            Alışverişe Başla
-          </Button>
-        </Link>
+        <Button 
+          variant="primary"
+          onClick={goToShopping}
+        >
+          Alışverişe Başla
+        </Button>
       </div>
     );
   }

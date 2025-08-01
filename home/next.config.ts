@@ -12,19 +12,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  
-  // Multi-zone configuration
-  async rewrites() {
-    return [
-      {
-        source: '/cart/:path*',
-        destination: 'http://localhost:3001/:path*',
-      },
-    ];
-  },
-  
-  // Base path for home app
-  basePath: '',
 };
 
 export default nextConfig;

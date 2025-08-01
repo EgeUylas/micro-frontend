@@ -40,8 +40,9 @@ export default function Header() {
               Ana Sayfa
             </Link>
             
-            <Link 
-              href="/cart" 
+            <a 
+              href="http://localhost:3001" 
+              target="_blank"
               className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors relative"
             >
               <span className="text-xl">🛒</span>
@@ -51,7 +52,7 @@ export default function Header() {
                   {cartData.itemCount}
                 </span>
               )}
-            </Link>
+            </a>
           </nav>
         </div>
       </div>
