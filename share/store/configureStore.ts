@@ -5,7 +5,7 @@ import { RootState } from '../types/store';
 export const createStore = () => {
   return configureStore({
     reducer: {
-      // Reducers will be injected by the individual micro-frontends
+      // Reducers will be injected by the individual micro-fronten
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
