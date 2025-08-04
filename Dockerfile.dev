@@ -1,0 +1,26 @@
+FROM node:18-alpine AS base
+RUN corepack enable pnpm
+WORKDIR /app
+
+FROM base AS deps
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml* ./
+COPY packages/ui/package.json ./packages/ui/
+COPY apps/home/package.json ./apps/home/
+COPY apps/cart/package.json ./apps/cart/
+RUN pnpm install --frozen-lockfile
+
+FROM base AS home-dev
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/packages ./packages
+COPY --from=deps /app/apps/home/node_modules ./apps/home/node_modules
+COPY . .
+EXPOSE 3000
+CMD ["pnpm", "--filter", "home", "run", "dev"]
+
+FROM base AS cart-dev
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/packages ./packages  
+COPY --from=deps /app/apps/cart/node_modules ./apps/cart/node_modules
+COPY . .
+EXPOSE 3001
+CMD ["pnpm", "--filter", "cart", "run", "dev"]

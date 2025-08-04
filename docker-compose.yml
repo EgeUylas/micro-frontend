@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  home:
+    build:
+      context: ./apps/home
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - micro-frontend-network
+    restart: unless-stopped
+
+  cart:
+    build:
+      context: ./apps/cart
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - micro-frontend-network
+    restart: unless-stopped
+
+  # Development services
+  home-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      target: home-dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/apps/home/node_modules
+      - /app/apps/cart/node_modules
+      - /app/packages/ui/node_modules
+    environment:
+      - NODE_ENV=development
+    networks:
+      - micro-frontend-network
+    profiles:
+      - dev
+
+  cart-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      target: cart-dev
+    ports:
+      - "3001:3001"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/apps/home/node_modules
+      - /app/apps/cart/node_modules
+      - /app/packages/ui/node_modules
+    environment:
+      - NODE_ENV=development
+    networks:
+      - micro-frontend-network
+    profiles:
+      - dev
+
+networks:
+  micro-frontend-network:
+    driver: bridge
